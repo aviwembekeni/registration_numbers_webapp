@@ -1,0 +1,56 @@
+     
+
+    <div class="mdl-grid" >
+        <h2>Handle Bars Section</h2>
+        <span>Registration Number:</span>
+        <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
+
+            <form action="/registration" method="POST">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input regNumFieldHandleBars" type="text" name="reg">
+
+                </div><br>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect addButtonHandleBars" type="submit" style="background-color:#1AB365; color:white">
+                ADD
+            </button>
+            </form>
+            <div class="entry">
+                <h1> {{messages.info}}</h1>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="mdl-grid select">
+        <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
+            <span>Town: </span>
+           <select  onchange="selectTown()" name="townName" class="townSelectHandleBars" >
+            <option value="all" >All Towns</option>
+            {{#each filters}}
+                <option value="{{startswith}}" {{selectedTag}} >{{town_name}}</option>
+            {{/each}}
+            </select>
+
+            <a href="/reset"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent clearRegNumsHandleBars">
+                Clear list
+            </button></a>
+        </div>
+
+    </div>
+
+    <div class="mdl-grid regNumbersDisplayHandleBars">
+
+        {{#each registrationNumbers}}
+            <p class="mdl-button mdl-button--accent regNumDisHb"> {{reg_num}}</p>
+        {{/each}}
+
+    </div>
+
+<script>
+ function selectTown(){
+     console.log("clicked");
+     var tag = document.querySelector(".townSelectHandleBars").value; 
+    location.href = '/filter/' + tag;
+ }
+
+</script>

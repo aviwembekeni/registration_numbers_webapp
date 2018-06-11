@@ -1,0 +1,131 @@
+body{
+  background-color: #e5e4d7;
+ 
+}
+
+*{
+  margin: 0 auto;
+}
+
+.wrapper{
+  margin-top: 5%;
+  margin-left: 10%;
+
+}
+
+.mdl-button{
+  width: 30%;
+  margin-left: 10px;
+}
+
+.enterRegNoHandleBars{
+  width: 100%;
+}
+
+h2 {
+  margin-left:  30%;
+}
+
+.regNumField{
+  margin-left:  30%;
+  width: 20%;
+  padding: 1em 3px;
+  font-size: 16px;
+  color: white;
+}
+
+.button2 {
+    width: 15%;
+    background-color: #E65100; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 30%;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-transform: uppercase;
+}
+
+.clearRegNums:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.regNumbersDisplay{
+
+  padding: 3rem 1rem;
+
+
+}
+
+p.regNumDis {
+  width: 15%;
+  border: 1px solid;
+  border-radius: 5px;
+  background: yellow;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  margin-left: 1.5em;
+  margin-bottom: 1.5em;
+
+
+}
+
+p.regNumDisHb {
+  width: 15%;
+  border: 1px solid;
+  border-radius: 5px;
+  background: yellow;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  margin-left: 1.5em;
+  margin-bottom: 1.5em;
+
+
+}
+
+.townSelectHandleBars{
+  margin: 15px 3px;
+  font-family: "Helvetica","Arial",sans-serif;
+   font-size: 25px;
+   display: block;
+}
+
+span{
+  width: 100%;
+  margin: 10px;
+  margin-left: 12px;
+  font-size: 20px;
+}
+
+@media screen and (max-width: 992px) and (min-width: 480px){
+
+  body{
+    padding-left: 0;
+    
+  }
+
+  span{
+    font-size: 320%;
+  }
+
+  .mdl-button{
+    font-size: 250%;
+    padding: 1em 1.5rem;
+  }
+
+}
