@@ -4,8 +4,6 @@ module.exports = function(pool){
 
       async function addRegNum(regNum){
 
-
-
         regNum = regNum.toUpperCase();
 
         var startsWith = regNum.substring(0, 2).trim();
