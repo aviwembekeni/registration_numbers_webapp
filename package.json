@@ -20,6 +20,7 @@
     "express-flash": "git://github.com/RGBboy/express-flash.git",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
+    "mocha": "^5.2.0",
     "pg": "^7.4.3"
   }
 }

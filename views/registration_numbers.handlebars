@@ -7,7 +7,7 @@
 
             <form action="/registration" method="POST">
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input regNumFieldHandleBars" type="text" name="reg">
+                <input class="mdl-textfield__input regNumFieldHandleBars" pattern="[A-Z]{2}\s\d{3}\W\d{3}" placeholder="CA 111-111" type="text" name="reg">
 
                 </div><br>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect addButtonHandleBars" type="submit" style="background-color:#1AB365; color:white">
@@ -15,8 +15,8 @@
             </button>
             </form>
             {{#if messages.info}}
-                <div class="entry">
-                    <h6>{{messages.info}}</h6>
+                <div class="{{flashStyle}}">
+                    <h5>{{messages.info}}</h5>
                 </div>
             {{/if}}
             
@@ -26,8 +26,8 @@
     <div class="mdl-grid select">
         <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
             <span>Town: </span>
-           <select  onchange="selectTown()" name="townName" class="townSelectHandleBars" >
-            <option value="all" >All Towns</option>
+           <select  onchange="selectTown()" name="townSelect" class="townSelect" >
+            <option value="all" >AllTown</option>
             {{#each filters}}
                 <option value="{{startswith}}" {{selectedTag}} >{{town_name}}</option>
             {{/each}}
@@ -51,7 +51,7 @@
 <script>
  function selectTown(){
     
-     var tag = document.querySelector(".townSelectHandleBars").value; 
+     var tag = document.querySelector(".townSelect").value; 
     location.href = '/filter/' + tag;
  }
 

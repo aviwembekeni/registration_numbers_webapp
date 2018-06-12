@@ -29,13 +29,6 @@ module.exports = function Registration_numbers(pool){
         return results.rows;
       }
   
-      function regNumberFromTown(regNum){
-        if (regNum.startsWith('CA') || regNum.startsWith('CJ') || regNum.startsWith('CF') || regNum.startsWith('CY')) {
-          return true;
-        }else {
-          return false;
-        }
-      }
   
       async function filterBySelectedTown(selecedTown){
 
@@ -51,29 +44,7 @@ module.exports = function Registration_numbers(pool){
         }else{
           return filt.rows;
         }
-        /*var filteredObj = {};
-        var startsWith ;
-  
-        if (selecedTown == "cape town") {
-          startsWith = 'CA';
-        } else if (selecedTown == "paarl") {
-          startsWith = 'CJ';
-        } else if (selecedTown == "belville") {
-          startsWith = 'CY';
-        } else if (selecedTown == "strand") {
-          startsWith = 'CF';
-        }else if (selecedTown == "all") {
-          return regNums;
-        }
-  
-        Object.keys(regNums).map(regNo =>{
-         if (regNo.startsWith(startsWith)) {
-           filteredObj[regNo] = 0;
-         }
-  
-        })
-  
-        return filteredObj;*/
+       
       }
   
       async function clearRegNos(){
@@ -82,20 +53,19 @@ module.exports = function Registration_numbers(pool){
       }
 
       async function selectors(tag){
-        let towns = await pool.query('SELECT town_name , startsWith FROM towns');
-        for (let i = 0; i < towns.rowCount; i++) {
-          let current = towns.rows[i];
+        let storedTowns = await pool.query('SELECT town_name , startsWith FROM towns');
+        for (let i = 0; i < storedTowns.rowCount; i++) {
+          let current = storedTowns.rows[i];
           if (current.startsWith===tag) {
             current.selected = true;
           }
         }
-        return towns.rows;
+        return storedTowns.rows;
        }
   
     return {
       addRegNum,
       getRegNums,
-      regNumberFromTown,
       filterBySelectedTown,
       clearRegNos,
       selectors

@@ -35,6 +35,13 @@ app.engine('handlebars', exphbs(
                 if(this.selected){
                     return 'selected';
                 }
+            },
+            flashStyle: function(){
+                if(this.messages.info == "Registration number successfully added!"){
+                    return "success";
+                }else {
+                    return "failure";
+                }
             }
     }
 
@@ -64,7 +71,9 @@ app.get('/', async function(req, res, next){
         
         let registrationNumbers = await registration_numbers.getRegNums();
         let filters = await registration_numbers.selectors();
-  
+
+        console.log(filters);
+    
         res.render("registration_numbers", {registrationNumbers, filters});
 
     } catch (error) {
@@ -81,10 +90,11 @@ app.post('/registration', async function(req, res, next){
        // let validReg = registration_numbers.regNumberFromTown(reg_num);
        // if (validReg) {
         var added = await registration_numbers.addRegNum(reg_num);
+
         if(added){
             req.flash('info', "Registration number successfully added!");
         }else{
-            req.flash('info', "Please enter a registration number that is included in the filter");
+            req.flash('info', "Please enter a registration number that is included in the filter and must not be a duplicate.");
         }
         
             res.redirect("/");
@@ -106,9 +116,9 @@ app.post('/registration/:reg_number', async function(req, res, next){
          // if (validReg) {
           var added = await registration_numbers.addRegNum(reg_num);
           if(added){
-                 req.flash('info', "Registration number successfully added!");
+                req.flash('info', "Registration number successfully added!");
             }else{
-                req.flash('info', "Please enter a registration number that is included in the filter");
+                req.flash('info', "Please enter a registration number that is included in the filter must not be a duplicate.");
             }
 
             res.redirect("/");
@@ -140,6 +150,8 @@ app.get('/filter/:town', async function (req, res, next) {
     
         let registrationNumbers = await registration_numbers.filterBySelectedTown(town);
         let filters = await registration_numbers.selectors(town);
+
+        console.log('after filter',filters);
 
         res.render("registration_numbers", {registrationNumbers, filters});
     } catch (error) {

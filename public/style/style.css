@@ -7,6 +7,14 @@ body{
   margin: 0 auto;
 }
 
+.success{
+  color : #1AB365;
+}
+
+.failure{
+  color : orange;
+}
+
 .wrapper{
   margin-top: 5%;
   margin-left: 10%;
@@ -98,7 +106,7 @@ p.regNumDisHb {
 
 }
 
-.townSelectHandleBars{
+.townSelect{
   margin: 15px 3px;
   font-family: "Helvetica","Arial",sans-serif;
    font-size: 25px;
