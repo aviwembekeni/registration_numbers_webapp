@@ -1,10 +1,10 @@
-module.exports = function Registration_numbers(pool){
-  
+module.exports = function(pool){
+
   var VALID_TAGS = ['all', 'CA', 'CJ', 'CY', 'CF'];
-  
+
       async function addRegNum(regNum){
 
-        
+
 
         regNum = regNum.toUpperCase();
 
@@ -16,20 +16,20 @@ module.exports = function Registration_numbers(pool){
 
         var results = await pool.query('SELECT * FROM registrationNumbers WHERE reg_num = $1', [regNum]);
         if(results.rowCount === 0){
-          
+
           let townId = await pool.query('SELECT id FROM towns where startsWith = $1', [startsWith]);
-          
+
           await pool.query('INSERT INTO registrationNumbers (reg_num, town) VALUES ($1, $2)', [regNum, townId.rows[0].id]);
           return true;
         }
       }
-  
+
       async function getRegNums(){
         let results = await pool.query('SELECT reg_num from registrationNumbers');
         return results.rows;
       }
-  
-  
+
+
       async function filterBySelectedTown(selecedTown){
 
         if (!VALID_TAGS.includes(selecedTown)) {
@@ -44,9 +44,9 @@ module.exports = function Registration_numbers(pool){
         }else{
           return filt.rows;
         }
-       
+
       }
-  
+
       async function clearRegNos(){
         let emptyRegs = await pool.query('DELETE FROM registrationNumbers');
         return emptyRegs.rows;
@@ -62,7 +62,7 @@ module.exports = function Registration_numbers(pool){
         }
         return storedTowns.rows;
        }
-  
+
     return {
       addRegNum,
       getRegNums,
