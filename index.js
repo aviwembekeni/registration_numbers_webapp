@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const exphbs  = require('express-handlebars');
 var flash = require('express-flash');
 var cookieParser = require('cookie-parser');
-var cookieSession = require('cookie-session')
+var session = require('express-session')
 const Registration_numbers = require("./registration_numbers");
 const pg = require('pg');
 const Pool = pg.Pool; 
@@ -42,6 +42,14 @@ app.engine('handlebars', exphbs(
 
 app.set('view engine', 'handlebars');
 
+app.use(session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true
+}));
+
+app.use(flash());
+
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
 app.use(express.static('public'));
@@ -72,7 +80,12 @@ app.post('/registration', async function(req, res, next){
         let reg_num = req.body.reg;
        // let validReg = registration_numbers.regNumberFromTown(reg_num);
        // if (validReg) {
-        await registration_numbers.addRegNum(reg_num);
+        var added = await registration_numbers.addRegNum(reg_num);
+        if(added){
+            req.flash('info', "Registration number successfully added!");
+        }else{
+            req.flash('info', "Please enter a registration number that is included in the filter");
+        }
         
             res.redirect("/");
        // } else {
@@ -91,9 +104,14 @@ app.post('/registration/:reg_number', async function(req, res, next){
           let reg_num = req.params.reg;
          // let validReg = registration_numbers.regNumberFromTown(reg_num);
          // if (validReg) {
-          await registration_numbers.addRegNum(reg_num);
-          
-              res.redirect("/");
+          var added = await registration_numbers.addRegNum(reg_num);
+          if(added){
+                 req.flash('info', "Registration number successfully added!");
+            }else{
+                req.flash('info', "Please enter a registration number that is included in the filter");
+            }
+
+            res.redirect("/");
          // } else {
               //req.flash('info', 'Registration number must be from Cape Town, Belville, Paarl or Strand only!');
               //res.redirect('/'); 
