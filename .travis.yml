@@ -4,5 +4,16 @@ node_js:
   - "10.4.0"
 services:
   -postgresql
+  env:
+       - DB=postgresql://postgres@localhost:5432/registrations
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -c 'create database  registrations;' -U postgres
+  - psql -U postgres -d registrations -a -f registrationdb-script.sql
+
+addons:
+    apt:
+    packages:
+    - postgresql-server-dev-9.2
+    
+   Name : DATABASE_URL
+   value : //postgres@localhost:5432/registrations
