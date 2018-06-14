@@ -1,19 +1,18 @@
-
 language: node_js
+
+env:
+     - DB=postgresql://postgres@localhost:5432/registrationNumbers
 node_js:
-  - "10.4.0"
-services:
-  -postgresql
-  env:
-       - DB=postgresql://postgres@localhost:5432/registrations
+        - "10.4.0"
+
 before_script:
-  - psql -c 'create database  registrations;' -U postgres
-  - psql -U postgres -d registrations -a -f registrationdb-script.sql
+  - psql -c 'create database  registrationNumbers;' -U postgres
+  - psql -U postgres -d registrationNumbers -a -f registrationdb-script.sql
 
 addons:
     apt:
     packages:
     - postgresql-server-dev-9.2
-    
+
    Name : DATABASE_URL
-   value : //postgres@localhost:5432/registrations
+   value : //postgres@localhost:5432/registrationNumbers
